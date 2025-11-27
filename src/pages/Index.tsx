@@ -3,7 +3,7 @@ import AssetCard from "@/components/AssetCard";
 import StatsCard from "@/components/StatsCard";
 import { mockAssets } from "@/lib/mockData";
 import { TrendingUp, Package, Users, DollarSign } from "lucide-react";
-import heroImage from "@/assets/hero-bg.jpg";
+import heroImage from "@/assets/hero-bg";
 
 const Index = () => {
   return (

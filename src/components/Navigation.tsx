@@ -6,12 +6,15 @@ import {
   SheetContent,
   SheetTrigger,
 } from "@/components/ui/sheet";
+import WalletButton from "./WalletButton";
+import { useWallet } from "@/contexts/WalletContext";
 
 const Navigation = () => {
+  const { isConnected } = useWallet();
+  
   const links = [
-    { to: "/", label: "Home" },
-    { to: "/fractionalize", label: "Fractionalize" },
     { to: "/dashboard", label: "Dashboard" },
+    { to: "/fractionalize", label: "Fractionalize" },
     { to: "/widget", label: "Widget" },
   ];
 
@@ -28,7 +31,7 @@ const Navigation = () => {
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-8">
-            {links.map((link) => (
+            {isConnected && links.map((link) => (
               <NavLink
                 key={link.to}
                 to={link.to}
@@ -38,30 +41,36 @@ const Navigation = () => {
                 {link.label}
               </NavLink>
             ))}
+            <WalletButton />
           </div>
 
           {/* Mobile Navigation */}
-          <Sheet>
-            <SheetTrigger asChild className="md:hidden">
-              <Button variant="ghost" size="icon">
-                <Menu className="h-5 w-5" />
-              </Button>
-            </SheetTrigger>
-            <SheetContent>
-              <div className="flex flex-col gap-4 mt-8">
-                {links.map((link) => (
-                  <NavLink
-                    key={link.to}
-                    to={link.to}
-                    className="text-muted-foreground hover:text-foreground transition-colors text-lg"
-                    activeClassName="text-primary font-medium"
-                  >
-                    {link.label}
-                  </NavLink>
-                ))}
-              </div>
-            </SheetContent>
-          </Sheet>
+          <div className="md:hidden flex items-center gap-2">
+            <WalletButton />
+            {isConnected && (
+              <Sheet>
+                <SheetTrigger asChild>
+                  <Button variant="ghost" size="icon">
+                    <Menu className="h-5 w-5" />
+                  </Button>
+                </SheetTrigger>
+                <SheetContent>
+                  <div className="flex flex-col gap-4 mt-8">
+                    {links.map((link) => (
+                      <NavLink
+                        key={link.to}
+                        to={link.to}
+                        className="text-muted-foreground hover:text-foreground transition-colors text-lg"
+                        activeClassName="text-primary font-medium"
+                      >
+                        {link.label}
+                      </NavLink>
+                    ))}
+                  </div>
+                </SheetContent>
+              </Sheet>
+            )}
+          </div>
         </div>
       </div>
     </nav>
