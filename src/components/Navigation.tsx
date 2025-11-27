@@ -14,6 +14,7 @@ const Navigation = () => {
   
   const links = [
     { to: "/dashboard", label: "Dashboard" },
+    { to: "/explore", label: "Explore" },
     { to: "/fractionalize", label: "Fractionalize" },
     { to: "/widget", label: "Widget" },
   ];

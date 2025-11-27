@@ -41,6 +41,14 @@ const AppRoutes = () => {
         path="/dashboard" 
         element={
           <ProtectedRoute>
+            <Dashboard />
+          </ProtectedRoute>
+        } 
+      />
+      <Route 
+        path="/explore" 
+        element={
+          <ProtectedRoute>
             <Index />
           </ProtectedRoute>
         } 
