@@ -30,21 +30,48 @@ export const initializeBlockchain = async () => {
       wallet = new ethers.Wallet(privateKey, provider);
     }
 
-    // Contract ABI (simplified - you'll need the full ABI from Story Protocol)
-    const contractABI = [
-      "function mintIPToken(address to, string memory tokenURI) public returns (uint256)",
-      "function transferShares(uint256 tokenId, address to, uint256 shares) public",
-      "function getTokenInfo(uint256 tokenId) public view returns (address owner, uint256 totalShares, uint256 availableShares)",
+    // IP-Fi Platform Contract ABI (main functions)
+    const platformABI = [
+      "function createAsset(string memory ipfsHash, uint256 totalShares, uint256 pricePerShare, string memory assetType, uint256 royaltyRate) public returns (uint256)",
+      "function investInAsset(uint256 assetId, uint256 shareCount) public payable",
+      "function registerUser(string memory userType) public",
+      "function getPlatformStats() public view returns (tuple(uint256 totalAssets, uint256 totalInvestments, uint256 totalValueLocked, uint256 totalRoyaltiesDistributed, uint256 totalUsers))",
+      "function payRoyalties(uint256 assetId) public payable"
+    ];
+
+    // IP Asset NFT Contract ABI
+    const assetNFTABI = [
+      "function getAsset(uint256 tokenId) public view returns (tuple(address creator, string ipfsHash, uint256 totalShares, uint256 availableShares, uint256 pricePerShare, uint256 totalRaised, bool isListed, string assetType, uint256 createdAt, uint256 royaltyRate))",
+      "function getInvestment(uint256 tokenId, address investor) public view returns (tuple(uint256 shares, uint256 amountInvested, uint256 lastRoyaltyPayout, uint256 totalRoyaltiesReceived))",
+      "function getAssetInvestors(uint256 tokenId) public view returns (address[])",
       "function distributeRoyalties(uint256 tokenId) public payable"
     ];
 
-    // Initialize Story Protocol contract
-    if (contractAddress) {
-      storyProtocolContract = new ethers.Contract(
-        contractAddress,
-        contractABI,
-        wallet
-      );
+    // IPFI Token Contract ABI
+    const tokenABI = [
+      "function balanceOf(address account) public view returns (uint256)",
+      "function stakeTokens(uint256 amount) public",
+      "function unstakeTokens(uint256 amount) public",
+      "function claimRewards() public",
+      "function pendingRewards(address user) public view returns (uint256)",
+      "function getStakingInfo(address user) public view returns (tuple(uint256 stakedAmount, uint256 stakingStartTime, uint256 lastRewardClaim, uint256 totalRewardsEarned))"
+    ];
+
+    // Initialize IP-Fi Platform contracts
+    const platformAddress = process.env.IPFI_PLATFORM_ADDRESS || contractAddress;
+    const assetNFTAddress = process.env.IP_ASSET_NFT_ADDRESS;
+    const tokenAddress = process.env.IPFI_TOKEN_ADDRESS;
+
+    if (platformAddress) {
+      storyProtocolContract = new ethers.Contract(platformAddress, platformABI, wallet);
+    }
+
+    if (assetNFTAddress) {
+      global.assetNFTContract = new ethers.Contract(assetNFTAddress, assetNFTABI, wallet);
+    }
+
+    if (tokenAddress) {
+      global.tokenContract = new ethers.Contract(tokenAddress, tokenABI, wallet);
     }
 
     logger.info('✅ Blockchain services initialized successfully');
@@ -232,5 +259,115 @@ export const getETHtoUSD = async () => {
   } catch (error) {
     logger.error('Failed to get ETH price:', error);
     return 3000; // Fallback price
+  }
+};
+
+// Create IP asset on blockchain
+export const createIPAsset = async (assetData) => {
+  try {
+    if (!storyProtocolContract || !wallet) {
+      throw new Error('Blockchain not initialized');
+    }
+
+    const { ipfsHash, totalShares, pricePerShare, assetType, royaltyRate } = assetData;
+    
+    const tx = await storyProtocolContract.createAsset(
+      ipfsHash,
+      totalShares,
+      ethers.parseEther(pricePerShare.toString()),
+      assetType,
+      royaltyRate * 100 // Convert to basis points
+    );
+
+    const receipt = await tx.wait();
+    logger.info('Asset created on blockchain:', receipt.hash);
+    return receipt;
+  } catch (error) {
+    logger.error('Failed to create asset on blockchain:', error);
+    throw error;
+  }
+};
+
+// Invest in asset on blockchain
+export const investInAssetOnChain = async (assetId, shareCount, paymentAmount) => {
+  try {
+    if (!storyProtocolContract || !wallet) {
+      throw new Error('Blockchain not initialized');
+    }
+
+    const tx = await storyProtocolContract.investInAsset(
+      assetId,
+      shareCount,
+      { value: ethers.parseEther(paymentAmount.toString()) }
+    );
+
+    const receipt = await tx.wait();
+    logger.info('Investment completed on blockchain:', receipt.hash);
+    return receipt;
+  } catch (error) {
+    logger.error('Failed to invest on blockchain:', error);
+    throw error;
+  }
+};
+
+// Get asset details from blockchain
+export const getAssetFromChain = async (assetId) => {
+  try {
+    if (!global.assetNFTContract) {
+      throw new Error('Asset NFT contract not initialized');
+    }
+
+    const asset = await global.assetNFTContract.getAsset(assetId);
+    return {
+      creator: asset.creator,
+      ipfsHash: asset.ipfsHash,
+      totalShares: asset.totalShares.toString(),
+      availableShares: asset.availableShares.toString(),
+      pricePerShare: ethers.formatEther(asset.pricePerShare),
+      totalRaised: ethers.formatEther(asset.totalRaised),
+      isListed: asset.isListed,
+      assetType: asset.assetType,
+      createdAt: asset.createdAt.toString(),
+      royaltyRate: asset.royaltyRate.toString()
+    };
+  } catch (error) {
+    logger.error('Failed to get asset from blockchain:', error);
+    throw error;
+  }
+};
+
+// Get IPFI token balance
+export const getIPFITokenBalance = async (userAddress) => {
+  try {
+    if (!global.tokenContract) {
+      throw new Error('Token contract not initialized');
+    }
+
+    const balance = await global.tokenContract.balanceOf(userAddress);
+    return ethers.formatEther(balance);
+  } catch (error) {
+    logger.error('Failed to get IPFI token balance:', error);
+    throw error;
+  }
+};
+
+// Get platform statistics from blockchain
+export const getPlatformStatsFromChain = async () => {
+  try {
+    if (!storyProtocolContract) {
+      throw new Error('Platform contract not initialized');
+    }
+
+    const stats = await storyProtocolContract.getPlatformStats();
+    return {
+      totalAssets: stats.totalAssets.toString(),
+      totalInvestments: stats.totalInvestments.toString(),
+      totalValueLocked: ethers.formatEther(stats.totalValueLocked),
+      totalRoyaltiesDistributed: ethers.formatEther(stats.totalRoyaltiesDistributed),
+      totalUsers: stats.totalUsers.toString()
+    };
+  } catch (error) {
+    logger.error('Failed to get platform stats from blockchain:', error);
+    throw error;
   }
 };
