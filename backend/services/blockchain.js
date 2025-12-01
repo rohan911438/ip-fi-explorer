@@ -5,24 +5,21 @@ let provider;
 let wallet;
 let storyProtocolContract;
 
-// Initialize blockchain services
+// Initialize blockchain services for Story Protocol
 export const initializeBlockchain = async () => {
   try {
-    // Check if blockchain configuration is provided
-    const rpcUrl = process.env.ETHEREUM_RPC_URL;
+    // Use Story testnet configuration
+    const rpcUrl = process.env.STORY_TESTNET_RPC || 'https://rpc-story-testnet.rockx.com';
     const privateKey = process.env.PRIVATE_KEY;
-    const contractAddress = process.env.STORY_PROTOCOL_CONTRACT_ADDRESS;
     
-    // Skip initialization if using placeholder values
-    if (!rpcUrl || rpcUrl.includes('your-infura-project-id') ||
-        !privateKey || privateKey.includes('your-private-key-for-contract-interactions') ||
-        !contractAddress || contractAddress === '0x1234567890123456789012345678901234567890') {
-      logger.warn('⚠️ Blockchain service skipped - using placeholder configuration');
-      logger.info('💡 Update .env file with real blockchain credentials to enable blockchain features');
+    // Check if we have the required configuration
+    if (!privateKey || privateKey.includes('your-private-key')) {
+      logger.warn('⚠️ Blockchain service skipped - private key not configured');
+      logger.info('💡 Update .env file with real private key to enable blockchain features');
       return;
     }
     
-    // Initialize provider
+    // Initialize provider for Story testnet
     provider = new ethers.JsonRpcProvider(rpcUrl);
     
     // Initialize wallet
@@ -30,48 +27,41 @@ export const initializeBlockchain = async () => {
       wallet = new ethers.Wallet(privateKey, provider);
     }
 
-    // IP-Fi Platform Contract ABI (main functions)
-    const platformABI = [
-      "function createAsset(string memory ipfsHash, uint256 totalShares, uint256 pricePerShare, string memory assetType, uint256 royaltyRate) public returns (uint256)",
-      "function investInAsset(uint256 assetId, uint256 shareCount) public payable",
-      "function registerUser(string memory userType) public",
-      "function getPlatformStats() public view returns (tuple(uint256 totalAssets, uint256 totalInvestments, uint256 totalValueLocked, uint256 totalRoyaltiesDistributed, uint256 totalUsers))",
-      "function payRoyalties(uint256 assetId) public payable"
+    // Story Protocol contract addresses
+    const storyContracts = {
+      IPAssetRegistry: process.env.STORY_IP_ASSET_REGISTRY,
+      LicensingModule: process.env.STORY_LICENSING_MODULE,
+      RoyaltyModule: process.env.STORY_ROYALTY_MODULE,
+      LicenseRegistry: process.env.STORY_LICENSE_REGISTRY,
+      LicenseToken: process.env.STORY_LICENSE_TOKEN,
+      PILicenseTemplate: process.env.STORY_PIL_LICENSE_TEMPLATE,
+      GroupingModule: process.env.STORY_GROUPING_MODULE,
+      DisputeModule: process.env.STORY_DISPUTE_MODULE,
+      CoreMetadataModule: process.env.STORY_CORE_METADATA_MODULE
+    };
+
+    // Basic Story Protocol ABIs (simplified for demonstration)
+    const storyABI = [
+      "function totalSupply() external view returns (uint256)",
+      "function balanceOf(address owner) external view returns (uint256)",
+      "function tokenURI(uint256 tokenId) external view returns (string memory)",
+      "function register(address ipId, uint256 chainid, address tokenContract, uint256 tokenId) external",
+      "function ipId(uint256 chainId, address tokenContract, uint256 tokenId) external pure returns (address)"
     ];
 
-    // IP Asset NFT Contract ABI
-    const assetNFTABI = [
-      "function getAsset(uint256 tokenId) public view returns (tuple(address creator, string ipfsHash, uint256 totalShares, uint256 availableShares, uint256 pricePerShare, uint256 totalRaised, bool isListed, string assetType, uint256 createdAt, uint256 royaltyRate))",
-      "function getInvestment(uint256 tokenId, address investor) public view returns (tuple(uint256 shares, uint256 amountInvested, uint256 lastRoyaltyPayout, uint256 totalRoyaltiesReceived))",
-      "function getAssetInvestors(uint256 tokenId) public view returns (address[])",
-      "function distributeRoyalties(uint256 tokenId) public payable"
-    ];
+    // Initialize Story Protocol contracts
+    global.storyContracts = {};
+    
+    Object.entries(storyContracts).forEach(([name, address]) => {
+      if (address && ethers.isAddress(address)) {
+        global.storyContracts[name] = new ethers.Contract(address, storyABI, wallet);
+        logger.info(`✅ ${name} contract initialized at ${address}`);
+      }
+    });
 
-    // IPFI Token Contract ABI
-    const tokenABI = [
-      "function balanceOf(address account) public view returns (uint256)",
-      "function stakeTokens(uint256 amount) public",
-      "function unstakeTokens(uint256 amount) public",
-      "function claimRewards() public",
-      "function pendingRewards(address user) public view returns (uint256)",
-      "function getStakingInfo(address user) public view returns (tuple(uint256 stakedAmount, uint256 stakingStartTime, uint256 lastRewardClaim, uint256 totalRewardsEarned))"
-    ];
-
-    // Initialize IP-Fi Platform contracts
-    const platformAddress = process.env.IPFI_PLATFORM_ADDRESS || contractAddress;
-    const assetNFTAddress = process.env.IP_ASSET_NFT_ADDRESS;
-    const tokenAddress = process.env.IPFI_TOKEN_ADDRESS;
-
-    if (platformAddress) {
-      storyProtocolContract = new ethers.Contract(platformAddress, platformABI, wallet);
-    }
-
-    if (assetNFTAddress) {
-      global.assetNFTContract = new ethers.Contract(assetNFTAddress, assetNFTABI, wallet);
-    }
-
-    if (tokenAddress) {
-      global.tokenContract = new ethers.Contract(tokenAddress, tokenABI, wallet);
+    // Set main Story Protocol contract reference
+    if (storyContracts.IPAssetRegistry) {
+      storyProtocolContract = global.storyContracts.IPAssetRegistry;
     }
 
     logger.info('✅ Blockchain services initialized successfully');

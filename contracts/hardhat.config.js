@@ -8,8 +8,8 @@ const PRIVATE_KEY = process.env.PRIVATE_KEY || "0x000000000000000000000000000000
 const INFURA_PROJECT_ID = process.env.INFURA_PROJECT_ID || "";
 const ETHERSCAN_API_KEY = process.env.ETHERSCAN_API_KEY || "";
 const COINMARKETCAP_API_KEY = process.env.COINMARKETCAP_API_KEY || "";
-const THIRDWEB_SECRET_KEY = process.env.THIRDWEB_SECRET_KEY || "";
-const STORY_TESTNET_RPC = process.env.STORY_TESTNET_RPC || `https://1513.rpc.thirdweb.com/${THIRDWEB_SECRET_KEY}`;
+const BLOCKSCOUT_API_KEY = process.env.BLOCKSCOUT_API_KEY || "";
+const STORY_TESTNET_RPC = process.env.STORY_TESTNET_RPC || `https://story-testnet.blockscout.com/api/eth-rpc?apikey=${BLOCKSCOUT_API_KEY}`;
 
 /** @type import('hardhat/config').HardhatUserConfig */
 module.exports = {
@@ -75,13 +75,7 @@ module.exports = {
       gasPrice: 20000000000, // 20 gwei
     },
     storyTestnet: {
-      url: {
-        url: "https://1513.rpc.thirdweb.com",
-        headers: {
-          "Authorization": "Bearer U8qna1NhHwE79UtoxWkCxOLJC24NEg8GV1vuOYNwNCrT7evyYdF0g-MJudrf76E0iwK16mmJV1dwsnW7XBiPOw",
-          "Content-Type": "application/json"
-        }
-      },
+      url: STORY_TESTNET_RPC,
       accounts: [PRIVATE_KEY],
       chainId: 1513,
       gas: 6000000,

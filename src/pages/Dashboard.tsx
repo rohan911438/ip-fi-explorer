@@ -15,6 +15,7 @@ import {
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
+import StoryProtocolDashboard from "@/components/StoryProtocolDashboard";
 import "../components/animations.css";
 
 const Dashboard = () => {
@@ -117,7 +118,7 @@ const Dashboard = () => {
         </div>
 
         <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-6">
-          <TabsList className="grid w-full grid-cols-4 lg:w-fit lg:grid-cols-4">
+          <TabsList className="grid w-full grid-cols-5 lg:w-fit lg:grid-cols-5">
             <TabsTrigger value="overview" className="flex items-center gap-2">
               <BarChart3 className="h-4 w-4" />
               Overview
@@ -133,6 +134,10 @@ const Dashboard = () => {
             <TabsTrigger value="insights" className="flex items-center gap-2">
               <Target className="h-4 w-4" />
               Insights
+            </TabsTrigger>
+            <TabsTrigger value="story-protocol" className="flex items-center gap-2">
+              <Shield className="h-4 w-4" />
+              Story Protocol
             </TabsTrigger>
           </TabsList>
 
@@ -528,6 +533,10 @@ const Dashboard = () => {
                 </CardContent>
               </Card>
             </div>
+          </TabsContent>
+
+          <TabsContent value="story-protocol" className="space-y-6">
+            <StoryProtocolDashboard />
           </TabsContent>
         </Tabs>
       </div>

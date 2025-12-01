@@ -20,6 +20,7 @@ import transactionRoutes from './routes/transactions.js';
 import royaltyRoutes from './routes/royalties.js';
 import analyticsRoutes from './routes/analytics.js';
 import blockchainRoutes from './routes/blockchain.js';
+import storyProtocolRoutes from './routes/storyProtocol.js';
 import notificationRoutes from './routes/notifications.js';
 
 // Import middleware
@@ -112,6 +113,7 @@ app.use('/api/transactions', transactionRoutes);
 app.use('/api/royalties', royaltyRoutes);
 app.use('/api/analytics', analyticsRoutes);
 app.use('/api/blockchain', blockchainRoutes);
+app.use('/api/story-protocol', storyProtocolRoutes);
 app.use('/api/notifications', notificationRoutes);
 
 // Socket.IO for real-time updates
