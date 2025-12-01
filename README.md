@@ -11,7 +11,8 @@
 **Team Name:** BROTHERHOOD  
 **Team Member:** Rohan Kumar  
 **GitHub:** [@rohan911438](https://github.com/rohan911438)  
-**Repository:** [ip-fi-explorer](https://github.com/rohan911438/ip-fi-explorer)
+**Repository:** [ip-fi-explorer](https://github.com/rohan911438/ip-fi-explorer)  
+**📊 Pitch Deck:** [Interactive Presentation](https://claude.ai/public/artifacts/3263df29-2a13-46cf-a26c-e2f3c2892263)
 
 ---
 
@@ -27,7 +28,9 @@ We've published a standalone NPM package for developers to integrate IP fraction
 npm install ip-fi-swap-widget
 ```
 **🔗 NPM Package:** [https://www.npmjs.com/package/ip-fi-swap-widget](https://www.npmjs.com/package/ip-fi-swap-widget)  
-**🎨 Live Demo:** [Widget Playground](/widget)
+**🎨 Live Demo:** [Widget Playground](/widget)  
+**🚀 Live Application:** [https://ip-fi-explorerr-dgnl.vercel.app/](https://ip-fi-explorerr-dgnl.vercel.app/)  
+**📊 Pitch Deck:** [View Presentation](https://claude.ai/public/artifacts/3263df29-2a13-46cf-a26c-e2f3c2892263)
 
 ### 🎯 The Problem We Solve
 
@@ -192,8 +195,9 @@ npm run dev
 ```
 
 6. **Access the Application**
-- Frontend: http://localhost:3000
-- Backend API: http://localhost:5000/api
+- **Live Production:** [https://ip-fi-explorerr-dgnl.vercel.app/](https://ip-fi-explorerr-dgnl.vercel.app/)
+- **Local Frontend:** http://localhost:3000
+- **Local Backend API:** http://localhost:5000/api
 
 ---
 
