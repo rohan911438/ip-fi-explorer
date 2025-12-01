@@ -22,6 +22,7 @@ import analyticsRoutes from './routes/analytics.js';
 import blockchainRoutes from './routes/blockchain.js';
 import storyProtocolRoutes from './routes/storyProtocol.js';
 import notificationRoutes from './routes/notifications.js';
+import ipEnforcementRoutes from './routes/ipEnforcement.js';
 
 // Import middleware
 import { errorHandler } from './middleware/errorHandler.js';
@@ -104,7 +105,7 @@ app.get('/health', (req, res) => {
   });
 });
 
-// API Routes
+// Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/assets', assetRoutes);
@@ -115,6 +116,7 @@ app.use('/api/analytics', analyticsRoutes);
 app.use('/api/blockchain', blockchainRoutes);
 app.use('/api/story-protocol', storyProtocolRoutes);
 app.use('/api/notifications', notificationRoutes);
+app.use('/api/ip-enforcement', ipEnforcementRoutes);
 
 // Socket.IO for real-time updates
 io.on('connection', (socket) => {

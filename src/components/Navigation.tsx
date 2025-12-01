@@ -17,6 +17,7 @@ const Navigation = () => {
     { to: "/explore", label: "Explore" },
     { to: "/fractionalize", label: "Fractionalize" },
     { to: "/widget", label: "Widget" },
+    { to: "/ip-enforcement", label: "IP Enforcement" },
   ];
 
   return (

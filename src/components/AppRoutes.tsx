@@ -6,6 +6,7 @@ import AssetDetail from "@/pages/AssetDetail";
 import Fractionalize from "@/pages/Fractionalize";
 import Dashboard from "@/pages/Dashboard";
 import Widget from "@/pages/Widget";
+import IPEnforcement from "@/pages/IPEnforcement";
 import NotFound from "@/pages/NotFound";
 import ProtectedRoute from "./ProtectedRoute";
 
@@ -74,6 +75,14 @@ const AppRoutes = () => {
         element={
           <ProtectedRoute>
             <Widget />
+          </ProtectedRoute>
+        } 
+      />
+      <Route 
+        path="/ip-enforcement" 
+        element={
+          <ProtectedRoute>
+            <IPEnforcement />
           </ProtectedRoute>
         } 
       />

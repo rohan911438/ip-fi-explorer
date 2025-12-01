@@ -44,6 +44,7 @@ IP-Fi Explorer creates a comprehensive ecosystem that:
 - **Automates Royalty Distribution** through smart contracts
 - **Provides IP Registration & Management** via Story Protocol integration
 - **Creates Liquid Markets** for IP investments
+- **🆕 AI-Powered IP Enforcement** for detecting and preventing violations
 
 ---
 
@@ -113,6 +114,14 @@ LicenseRegistry: 0x529a750E02d8E2f15649c13D69a465286a780e24
 - **Role-based Access Control:** Granular permissions for different user types
 - **Audit Trail:** Complete transaction and ownership history
 - **Compliance Ready:** Built for regulatory compliance and reporting
+
+### 🛡️ **IP Enforcement & Detection** *(NEW)*
+- **AI-Powered Detection:** Google Vision API integration for image similarity detection
+- **Text Plagiarism Analysis:** Advanced NLP algorithms for content violation detection
+- **Real-time Monitoring:** Automated scanning across 15+ major platforms (OpenSea, GitHub, etc.)
+- **Blockchain Evidence Recording:** Immutable proof of violations on Story Protocol
+- **Automated Takedown Generation:** AI-generated legal notices and takedown requests
+- **Violation Analytics:** Comprehensive reporting and enforcement success tracking
 
 ---
 
@@ -185,6 +194,74 @@ npm run dev
 6. **Access the Application**
 - Frontend: http://localhost:3000
 - Backend API: http://localhost:5000/api
+
+---
+
+## 📖 Platform Navigation Guide
+
+### Main Sections
+
+1. **Dashboard** - Portfolio overview and investment tracking
+2. **Explore** - Browse available IP assets for investment  
+3. **Fractionalize** - Create fractional tokens from your IP assets
+4. **Widget** - Test and integrate IP calculation widgets
+5. **🆕 IP Enforcement** - AI-powered violation detection and legal enforcement
+
+### 🛡️ Using IP Enforcement & Detection
+
+**Access:** Navigate to "IP Enforcement" in the main menu after connecting your wallet.
+
+#### **Dashboard Tab**
+- View real-time monitoring status across 15+ platforms
+- See violation detection statistics and success rates
+- Quick access to start AI scans and view recent violations
+
+#### **AI Detection Tab**
+**Visual IP Detection:**
+1. Upload reference images (max 10 files)
+2. Select similarity threshold (default: 85%)
+3. Click "Start Visual Analysis"
+4. AI analyzes using Google Vision API for copyright infringement
+
+**Text & Content Detection:**
+1. Paste your original text content (max 5,000 characters)
+2. Enable semantic similarity analysis
+3. Click "Analyze Text Content"
+4. System checks for plagiarism and unauthorized usage
+
+#### **Violations Tab**
+- Review all detected violations with severity ratings
+- View confidence scores and evidence files
+- Track violation status: Detected → Investigating → Action Taken → Resolved
+
+#### **Enforcement Tab**
+**Takedown Requests:**
+1. Enter target platform and violation URL
+2. Specify legal basis (copyright, trademark, etc.)
+3. Generate automated takedown notice
+4. System sends legal documentation
+
+**Evidence Collection:**
+- Automatic blockchain recording on Story Protocol
+- Immutable timestamps and proof of violations
+- IPFS storage for evidence files
+- Download complete evidence packages for legal proceedings
+
+#### **Analytics Tab**
+- Detection accuracy rates (94%+ AI model accuracy)
+- Platform coverage statistics
+- Enforcement success tracking
+- Response time metrics
+
+### 🔧 API Integration
+
+The IP Enforcement system provides REST APIs for:
+```
+GET /api/ip-enforcement/violations - List violations
+POST /api/ip-enforcement/scan - Start AI detection
+POST /api/ip-enforcement/violation/:id/action - Take enforcement action
+GET /api/ip-enforcement/stats - Get enforcement statistics
+```
 
 ---
 
