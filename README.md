@@ -603,7 +603,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ### 🌐 Community Links
 - **Discord:** [Join Developer Community](#)
 - **Twitter:** [@StoryIPWidgets](#)
-- **Documentation:** [story-ip-widgets.dev/docs](#)
 - **Examples:** [github.com/rohan911438/widget-examples](#)
 
 ---
@@ -663,10 +662,8 @@ The project includes automated building and testing via:
 
 ## 🚀 Live Demos
 
-**Widget Playground:** [https://ip-fi-explorer.vercel.app/playground](https://ip-fi-explorer.vercel.app/playground)  
 **NPM Package:** [https://npmjs.com/package/@story-protocol/ip-widgets](https://npmjs.com/package/@story-protocol/ip-widgets)  
-**GitHub Repository:** [https://github.com/rohan911438/ip-fi-explorer](https://github.com/rohan911438/ip-fi-explorer)  
-**Documentation:** [https://story-ip-widgets.dev/docs](https://story-ip-widgets.dev/docs)
+**GitHub Repository:** [https://github.com/rohan911438/ip-fi-explorer](https://github.com/rohan911438/ip-fi-explorer)
 
 ---
 
