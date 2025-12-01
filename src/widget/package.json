@@ -1,0 +1,55 @@
+{
+  "name": "ip-fi-swap-widget",
+  "version": "1.0.0",
+  "description": "Embeddable IP Fraction Calculator Widget for React applications",
+  "type": "module",
+  "main": "dist/index.js",
+  "module": "dist/index.esm.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "vite build",
+    "dev": "vite build --watch"
+  },
+  "keywords": [
+    "ip",
+    "fractionalize",
+    "nft",
+    "story-protocol",
+    "react",
+    "widget",
+    "embed"
+  ],
+  "author": "IP-Fi Swap Team",
+  "license": "MIT",
+  "peerDependencies": {
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.3.23",
+    "@types/react-dom": "^18.3.7",
+    "@vitejs/plugin-react": "^4.2.1",
+    "typescript": "^5.8.3",
+    "vite": "^5.1.0",
+    "vite-plugin-dts": "^3.8.0"
+  },
+  "dependencies": {
+    "clsx": "^2.1.1",
+    "lucide-react": "^0.462.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rohan911438/ip-fi-explorer.git",
+    "directory": "src/widget"
+  },
+  "homepage": "https://ip-fi-explorer.vercel.app/widget",
+  "bugs": {
+    "url": "https://github.com/rohan911438/ip-fi-explorer/issues"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

@@ -1,0 +1,302 @@
+/* IP-Fi Widget Styles */
+.ipfi-widget {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  box-sizing: border-box;
+  border: 1px solid;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  position: relative;
+}
+
+.ipfi-widget * {
+  box-sizing: border-box;
+}
+
+.ipfi-widget-container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem;
+}
+
+/* Light Theme */
+.ipfi-widget-light {
+  background: #ffffff;
+  color: #1f2937;
+  border-color: #e5e7eb;
+}
+
+.ipfi-widget-light .ipfi-widget-header {
+  border-bottom: 1px solid #f3f4f6;
+}
+
+.ipfi-widget-light .ipfi-widget-input {
+  background: #ffffff;
+  border: 1px solid #d1d5db;
+  color: #1f2937;
+}
+
+.ipfi-widget-light .ipfi-widget-input:focus {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.ipfi-widget-light .ipfi-widget-results {
+  background: #f9fafb;
+  border: 1px solid #f3f4f6;
+}
+
+.ipfi-widget-light .ipfi-widget-button {
+  background: #3b82f6;
+  color: white;
+}
+
+.ipfi-widget-light .ipfi-widget-button:hover:not(:disabled) {
+  background: #2563eb;
+}
+
+.ipfi-widget-light .ipfi-widget-link {
+  color: #3b82f6;
+}
+
+/* Dark Theme */
+.ipfi-widget-dark {
+  background: #1f2937;
+  color: #f9fafb;
+  border-color: #374151;
+}
+
+.ipfi-widget-dark .ipfi-widget-header {
+  border-bottom: 1px solid #374151;
+}
+
+.ipfi-widget-dark .ipfi-widget-input {
+  background: #374151;
+  border: 1px solid #4b5563;
+  color: #f9fafb;
+}
+
+.ipfi-widget-dark .ipfi-widget-input:focus {
+  border-color: #60a5fa;
+  box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.1);
+}
+
+.ipfi-widget-dark .ipfi-widget-results {
+  background: #374151;
+  border: 1px solid #4b5563;
+}
+
+.ipfi-widget-dark .ipfi-widget-button {
+  background: #3b82f6;
+  color: white;
+}
+
+.ipfi-widget-dark .ipfi-widget-button:hover:not(:disabled) {
+  background: #2563eb;
+}
+
+.ipfi-widget-dark .ipfi-widget-link {
+  color: #60a5fa;
+}
+
+/* Header */
+.ipfi-widget-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding-bottom: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.ipfi-widget-icon {
+  width: 2rem;
+  height: 2rem;
+  background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+  border-radius: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+
+.ipfi-widget-title {
+  font-size: 1.125rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+/* Asset Info */
+.ipfi-widget-asset-info {
+  background: rgba(59, 130, 246, 0.1);
+  padding: 0.75rem;
+  border-radius: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.ipfi-widget-asset-name {
+  font-weight: 600;
+  font-size: 0.875rem;
+}
+
+.ipfi-widget-asset-id {
+  font-size: 0.75rem;
+  opacity: 0.7;
+  margin-top: 0.25rem;
+}
+
+/* Form */
+.ipfi-widget-form {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.ipfi-widget-input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.ipfi-widget-label {
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.ipfi-widget-input {
+  padding: 0.75rem;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  transition: all 0.2s;
+  outline: none;
+}
+
+.ipfi-widget-input:focus {
+  outline: none;
+}
+
+/* Results */
+.ipfi-widget-results {
+  padding: 1rem;
+  border-radius: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.ipfi-widget-result-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.ipfi-widget-result-label {
+  font-size: 0.875rem;
+  opacity: 0.8;
+}
+
+.ipfi-widget-result-value {
+  font-weight: 600;
+  font-size: 0.875rem;
+}
+
+.ipfi-widget-result-primary {
+  color: #3b82f6;
+  font-size: 1rem;
+}
+
+.ipfi-widget-result-success {
+  color: #10b981;
+}
+
+/* Button */
+.ipfi-widget-button {
+  padding: 0.875rem 1.5rem;
+  border: none;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  transition: all 0.2s;
+  margin-top: auto;
+}
+
+.ipfi-widget-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.ipfi-widget-button-loading {
+  pointer-events: none;
+}
+
+.ipfi-widget-loading {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.ipfi-widget-spinner {
+  width: 1rem;
+  height: 1rem;
+  border: 2px solid transparent;
+  border-top: 2px solid currentColor;
+  border-radius: 50%;
+  animation: ipfi-spin 1s linear infinite;
+}
+
+@keyframes ipfi-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Footer */
+.ipfi-widget-footer {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid;
+  border-color: inherit;
+}
+
+.ipfi-widget-powered-by {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-size: 0.75rem;
+  opacity: 0.7;
+}
+
+.ipfi-widget-link {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  text-decoration: none;
+  font-weight: 500;
+  transition: opacity 0.2s;
+}
+
+.ipfi-widget-link:hover {
+  opacity: 0.8;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .ipfi-widget-container {
+    padding: 1rem;
+  }
+  
+  .ipfi-widget-title {
+    font-size: 1rem;
+  }
+  
+  .ipfi-widget-button {
+    padding: 0.75rem 1rem;
+    font-size: 0.875rem;
+  }
+}
