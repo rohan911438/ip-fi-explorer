@@ -12,7 +12,8 @@
 **Team Member:** Rohan Kumar  
 **GitHub:** [@rohan911438](https://github.com/rohan911438)  
 **Repository:** [ip-fi-explorer](https://github.com/rohan911438/ip-fi-explorer)  
-**📊 Pitch Deck:** [Interactive Presentation](https://claude.ai/public/artifacts/3263df29-2a13-46cf-a26c-e2f3c2892263)
+**📊 Pitch Deck:** [Interactive Presentation](https://claude.ai/public/artifacts/3263df29-2a13-46cf-a26c-e2f3c2892263)  
+**🎥 Demo Video:** [YouTube Presentation](https://youtu.be/VWqBWKWBwzk?si=BD-Kyc0Xs2D9nxsE)
 
 ---
 
@@ -30,7 +31,8 @@ npm install ip-fi-swap-widget
 **🔗 NPM Package:** [https://www.npmjs.com/package/ip-fi-swap-widget](https://www.npmjs.com/package/ip-fi-swap-widget)  
 **🎨 Live Demo:** [Widget Playground](/widget)  
 **🚀 Live Application:** [https://ip-fi-explorerr-dgnl.vercel.app/](https://ip-fi-explorerr-dgnl.vercel.app/)  
-**📊 Pitch Deck:** [View Presentation](https://claude.ai/public/artifacts/3263df29-2a13-46cf-a26c-e2f3c2892263)
+**📊 Pitch Deck:** [View Presentation](https://claude.ai/public/artifacts/3263df29-2a13-46cf-a26c-e2f3c2892263)  
+**🎥 Demo Video:** [Watch on YouTube](https://youtu.be/VWqBWKWBwzk?si=BD-Kyc0Xs2D9nxsE)
 
 ### 🎯 The Problem We Solve
 
